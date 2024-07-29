@@ -3,7 +3,7 @@ include("DummyDocs.jl")
 using .DummyDocs
 
 makedocs(
-    sitename="BcdiCore.jl",
+    sitename="BcdiStrain.jl",
     format = Documenter.HTML(
         prettyurls = get(ENV, "CI", nothing) == "true"
     ),
@@ -14,5 +14,5 @@ makedocs(
 )
 
 deploydocs(
-    repo = "github.com/byu-cig/BcdiTrad.jl.git",
+    repo = "github.com/byu-cig/BcdiStrain.jl.git",
 )
