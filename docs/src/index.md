@@ -2,7 +2,7 @@
 
 ## About
 
-Bragg Coherent Diffraction Imaging (BCDI) Strain implements projection-based phase retrieval algorithms. Some of the core functionality of this project is implemented in BcdiCore.jl and BcdiTrad.jl. Additionally, this package is part of a collection of BCDI packages consisting of BcdiAtomic.jl (an atomic scale BCDI solver), BcdiMeso.jl (a mesoscale BCDI Solver), and BcdiMulti.jl (a multiscale BCDI solver).
+Bragg Coherent Diffraction Imaging (BCDI) Strain implements projection-based phase retrieval algorithms.
 
 While this package is marked as BCDI specific, the methods are more general and can be used in many phase retrieval problems. In the future, this package may be incorporated into a more general phase retrieval package.
 
