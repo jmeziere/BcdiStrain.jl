@@ -1,3 +1,9 @@
+"""
+    State(intensities, recSupport)
+
+Create a reconstruction object. The intensities and a mask over reciprocal space
+indicating trusted intensities need to be passed in.
+"""
 struct State
     rho::CuArray{Float64, 3, CUDA.Mem.DeviceBuffer}
     ux::CuArray{Float64, 3, CUDA.Mem.DeviceBuffer}

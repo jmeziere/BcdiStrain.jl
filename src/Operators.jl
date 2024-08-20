@@ -11,6 +11,11 @@ function operate(ol::OperatorList, state::State)
     end
 end
 
+"""
+    ER()
+
+Create an object that applies an iteration of ER
+"""
 struct ER{T} <: Operator
     er::T
    
@@ -24,6 +29,11 @@ function operate(er::ER, state)
     BcdiTrad.operate(er.er, state.traditionals[state.currTrad[]])
 end
 
+"""
+    HIO(beta)
+
+Create an object that applies an iteration of HIO
+"""
 struct HIO{T} <: Operator
     hio::T
 
@@ -37,6 +47,11 @@ function operate(hio::HIO, state)
     BcdiTrad.operate(hio.hio, state.traditionals[state.currTrad[]])
 end
 
+"""
+    Shrink(threshold, sigma, state)
+
+Create an object that applies shrinkwrap
+"""
 struct Shrink{T} <: Operator
     shrink::T
 
@@ -50,6 +65,11 @@ function operate(shrink::Shrink, state)
     BcdiTrad.operate(shrink.shrink, state.traditionals[state.currTrad[]])
 end
 
+"""
+    Center(state)
+
+Create an object that centers the current state
+"""
 struct Center{T} <: Operator
     center::T
 
@@ -81,6 +101,11 @@ function minDiffAngle(angle1::Float64, angle2)
     end
 end
 
+"""
+    Mount(beta, state, primitiveRecipLattice)
+
+Create an object that switches between peaks.
+"""
 struct Mount <: Operator
     beta::Float64
     xArr::CuArray{Float64, 3, CUDA.Mem.DeviceBuffer}
