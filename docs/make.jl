@@ -1,6 +1,4 @@
-using Documenter
-include("DummyDocs.jl")
-using .DummyDocs
+using Documenter, BcdiStrain
 
 makedocs(
     sitename="BcdiStrain.jl",
