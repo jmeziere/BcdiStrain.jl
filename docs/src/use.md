@@ -15,10 +15,10 @@ This short script applies 20 HIO iterations and one ER iterations for a total of
 # API
 
 ```@docs
-State
-ER
-HIO
-Shrink
-Center
-Mount
+BcdiStrain.State
+BcdiStrain.ER
+BcdiStrain.HIO
+BcdiStrain.Shrink
+BcdiStrain.Center
+BcdiStrain.Mount
 ```
