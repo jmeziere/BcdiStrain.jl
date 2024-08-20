@@ -15,10 +15,10 @@ This short script applies 20 HIO iterations and one ER iterations for a total of
 # API
 
 ```@docs
-State(intenities, recSupport)
-ER()
-HIO(beta)
-Shrink(threshold, sigma, state)
-Center(state)
-Mount(beta, state, primitiveRecipLattice)
+State
+ER
+HIO
+Shrink
+Center
+Mount
 ```
