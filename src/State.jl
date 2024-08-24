@@ -1,8 +1,16 @@
 """
     State(intensities, recSupport)
+    State(intensities, recSupport, support)
 
-Create a reconstruction object. The intensities and a mask over reciprocal space
-indicating trusted intensities need to be passed in.
+Create a reconstruction object. `intensities` is a vector of fully measured diffraction
+peaks and `recSupport` is a vector of masks over the intensities that removes those 
+intenities from the reconstruction process.
+
+The initialization process shifts each peak to be centered in the Fourier sense
+(i.e. the center of mass of the peak is moved to the edge of the image, or the
+zero frequency). If the support is not passed in, an initial guess of the support
+is created by taking an IFFT of the intensities and including everything above
+0.1 times the maximum value.
 """
 struct State
     rho::CuArray{Float64, 3, CUDA.Mem.DeviceBuffer}
@@ -25,17 +33,15 @@ struct State
         invInt = CUFFT.ifft(CuArray{Float64, 3, CUDA.Mem.DeviceBuffer}(intens[1]))
         support = abs.(invInt) .> 0.1 * maximum(abs.(invInt))
 
-        s = size(support)
+        State(intens, gVecs, recSupports, support)
+    end
+
+    function State(intens, gVecs, recSupports, support)
+        s = size(intens[1])
         rho = CUDA.zeros(Float64, s)
         ux = CUDA.zeros(Float64, s)
         uy = CUDA.zeros(Float64, s)
         uz = CUDA.zeros(Float64, s)
-
-        State(intens, gVecs, recSupports, rho, ux, uy, uz, support)
-    end
-
-    function State(intens, gVecs, recSupports, rho, ux, uy, uz, support)
-        s = size(intens[1])
 
         emptyCore = BcdiCore.TradState("L2", false, CUDA.zeros(Float64, s), CUDA.zeros(Float64, s), CUDA.zeros(Float64, s))
         traditionals = [BcdiTrad.State(intens[i], recSupports[i], support, emptyCore) for i in 1:length(intens)]
