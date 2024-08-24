@@ -1,4 +1,4 @@
-using Documenter, BcdiStrain
+using Documenter, DocumenterCitations, BcdiStrain
 
 makedocs(
     sitename="BcdiStrain.jl",
@@ -7,7 +7,8 @@ makedocs(
     ),
     pages = [
         "BcdiStrain"=>"index.md",
-        "Usage"=>"use.md"
+        "Usage"=>"use.md",
+        "References"=>"references.md"
     ]
 )
 
