@@ -1,10 +1,10 @@
 """
-    State(intensities, recSupport)
-    State(intensities, recSupport, support)
+    State(intensities, gVecs, recSupport)
+    State(intensities, gVecs, recSupport, support)
 
 Create a reconstruction object. `intensities` is a vector of fully measured diffraction
-peaks and `recSupport` is a vector of masks over the intensities that removes those 
-intenities from the reconstruction process.
+peaks, `gVecs` is a vector of peak locations, and `recSupport` is a vector of masks over 
+the intensities that removes those intenities from the reconstruction process.
 
 The initialization process shifts each peak to be centered in the Fourier sense
 (i.e. the center of mass of the peak is moved to the edge of the image, or the
