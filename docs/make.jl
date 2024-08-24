@@ -1,5 +1,7 @@
 using Documenter, DocumenterCitations, BcdiStrain
 
+bib = CitationBibliography(joinpath(@__DIR__, "src", "refs.bib"))
+
 makedocs(
     sitename="BcdiStrain.jl",
     format = Documenter.HTML(
@@ -8,7 +10,7 @@ makedocs(
     pages = [
         "BcdiStrain"=>"index.md",
         "Usage"=>"use.md",
-        "References"=>"references.md"
+        "References"=>"refs.md"
     ]
 )
 
