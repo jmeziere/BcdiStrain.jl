@@ -11,7 +11,8 @@ makedocs(
         "BcdiStrain"=>"index.md",
         "Usage"=>"use.md",
         "References"=>"refs.md"
-    ]
+    ],
+    plugins = [bib]
 )
 
 deploydocs(
