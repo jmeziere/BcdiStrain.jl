@@ -30,7 +30,7 @@ struct State{T,I}
     zPos::Vector{CuArray{Float64, 1, CUDA.Mem.DeviceBuffer}}
     keepInd::CuArray{CartesianIndex{3}, I, CUDA.Mem.DeviceBuffer}
 
-    function State(intens, gVecs, recSupports; rotations=nothing, highStrain=false, truncRecSupport=true)
+    function State(intens, gVecs, recSupports; rotations=nothing, highStrain=false, truncRecSupport=true, loss="L2")
         s = size(intens[1])
         n = rotations == nothing && !highStrain ? size(intens[1]) : reduce(*, size(intens[1]))
         rho = CUDA.zeros(Float64, s)
@@ -39,8 +39,8 @@ struct State{T,I}
         uz = CUDA.zeros(Float64, s)
         support = CUDA.zeros(Bool, n)
 
-        emptyCore = BcdiCore.TradState("L2", false, CUDA.zeros(Float64, n), CUDA.zeros(Float64, s), CUDA.zeros(Float64, s))
-        traditionals = [BcdiTrad.State(intens[i], recSupports[i], support, emptyCore, truncRecSupport) for i in 1:length(intens)]
+        emptyCore = BcdiCore.TradState(loss, false, CUDA.zeros(Float64, n), CUDA.zeros(Float64, s), CUDA.zeros(Float64, s))
+        traditionals = [BcdiTrad.State(loss, intens[i], recSupports[i], support, emptyCore, truncRecSupport) for i in 1:length(intens)]
         currTrad = Ref(rand(1:length(intens)))
 
         xArr = CUDA.zeros(Float64, s)
